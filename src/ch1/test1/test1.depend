@@ -1,6 +1,0 @@
-# depslib dependency file v1.0
-1712238892 source:d:\homework\forth\os\src\ch1\test1\main.c
-	<windows.h>
-	<stdio.h>
-	<time.h>
-

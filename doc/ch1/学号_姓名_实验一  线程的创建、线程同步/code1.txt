@@ -10,16 +10,16 @@ CWinApp theApp;
 use namespace std;
 
 void ThreadName1();
-static HANDLE hHandle1 = NULL;
+tatic HANDLE hHandle1 = NULL;
 DWORD dwThreadID1;
 
-int_tmain(int argc, TCHAR* argv[], TCHAR* envp[])
+int_tmain(in argc, TCHAR* argv[], TCHAR* envp[])
 {
     int nRetCode = 0;
-    hHandle1 = CreateThread((LPSECURITY_ATTRIBUTES)NULL,
+    hHandle1 = CreateThead((LPSECURITY_ATTRIBUTES)NULL,
         0,
         (LPTHREAD_START_ROUTINE)ThreadName1,
-        (LPVOID)NULL,
+        (LPVIOD)NULL,
         0,
         &dwThreadID1);
     Sleep(5000);
