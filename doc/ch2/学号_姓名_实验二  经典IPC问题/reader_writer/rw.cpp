@@ -1,9 +1,9 @@
 #include "windows.h"
 #include <conio.h>
 #include <stdlib.h>
-#include <fstream.h>
+#include <fstream>
 #include <io.h>
-#include <string.h> 
+#include <string.h>
 #include <stdio.h>
 
 #define READER 'R'
@@ -12,6 +12,8 @@
 #define MAX_THREAD_NUM 64
 #define	MAX_FILE_NUM 32
 #define MAX_STR_LEN 32
+
+using namespace std;
 
 int readcount = 0;
 int writecount = 0;
@@ -83,7 +85,7 @@ void RP_WriterThread(void* p)
     m_delay=(DWORD)(((ThreadInfo*)(p))->delay*INTE_PER_SEC);
 	m_persist=(DWORD)(((ThreadInfo*)(p))->persist*INTE_PER_SEC);
 	Sleep(m_delay);//延迟时间
-	
+
 	printf("Writer thread %d sents the writing require.\n",m_serial);
 	//等待资源
 	EnterCriticalSection(&RP_Write);
@@ -169,14 +171,14 @@ void WP_ReaderThread(void *p)
 
 	printf("Reader thread %d sents the reading require.\n",m_serial);
 	//wait_for_mutex1=WaitForSingleObject(h_Mutex1,-1);
-	
+
 	//
 	EnterCriticalSection(&cs_Read);
 	//阻塞互斥对象mutex2,保证对readcount的访问、修改互斥
 	wait_for_mutex2=WaitForSingleObject(h_Mutex2,-1);
-	
+
 	//LeaveCriticalSection(&cs_Read);
-	
+
 	//修改读者数目
 		readcount++;
 	if(readcount ==1)
@@ -322,20 +324,20 @@ int main(int argc,char*argv[])
 		printf("          3:Exit to Windows\n");
         printf("**************************************\n");
 		printf("Enter your choice(1,2 or 3):   ");
-	
+
 		do{
 			ch=(char)_getch();
 		}while(ch!='1'&&ch!='2'&&ch!='3');
-	
+
 		system("cls");
-	
+
 		if(ch=='3')
 			return 0;
 		else if(ch=='1')
 			ReaderPriority("thread.dat");
 		else
 			WriterPriority("thread.dat");
-	
+
 		printf("\nPress Any Key to Continue");
 		_getch();
 		system("cls");
